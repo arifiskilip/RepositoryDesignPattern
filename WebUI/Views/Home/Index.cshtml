@@ -1,0 +1,34 @@
+﻿
+@using WebUI.Core.Models;
+@model List<UserModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Hesap Sayısı</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td><getAccountCount user-id="item.Id"></getAccountCount></td>
+                <td><a class="btn btn-outline-primary" asp-action="Create" asp-controller="Account" asp-route-id="@item.Id"> Hesap Oluştur</a>
+                    <input class="btn btn-outline-warning" value="Hesaplar" type="submit" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

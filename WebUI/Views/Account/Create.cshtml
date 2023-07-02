@@ -1,0 +1,49 @@
+﻿@model UserAcountCreateRelation
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row cotainer">
+    <div class="col-md-6">
+        <h3><b>Kullanıcı Bilgileri</b></h3>
+        <div class="form-group">
+            <p>Hoş Geldiniz : @Model.UserModel.FirstName @Model.UserModel.LastName</p>
+            Aktif Hesap : <getAccountCount user-id="@Model.UserModel.Id"></getAccountCount>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3><b>Hesap Oluştur</b></h3>
+        <form asp-action="Create" asp-controller="Account" method="post">
+            <input type="hidden" asp-asp-for="@Model.CreateAccountModel.UserId" value="@ViewBag.userId" name="UserId" />
+            <div class="form-group">
+                <label>Hesap No: </label>
+                <input type="text" class="form-control" name="AccountNumber" asp-for="@Model.CreateAccountModel.AccountNumber" />
+                <div class="text-danger">
+                    <span>*</span>
+                    <span asp-validation-for="@Model.CreateAccountModel.AccountNumber"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Bakiye:</label>
+                <div class="text-danger">
+                    <input type="number" class="form-control" name="Balance" asp-for="@Model.CreateAccountModel.Balance" />
+                    <div class="text-danger">
+                        <span>*</span>
+                        <span asp-validation-for="@Model.CreateAccountModel.Balance"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger">
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-outline-success" value="Oluştur" type="submit" />
+                </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
